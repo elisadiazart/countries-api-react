@@ -1,10 +1,29 @@
-import { StyledForm, StyledInput, StyledSelect } from "./styles"
+import { useEffect, useState } from "react";
+import { StyledCard, StyledForm, StyledInput, StyledSelect, StyledFlag, StyledName, StyledText, StyledSpan } from "./styles"
+import { v4 } from "uuid";
+
+
+
+
 
 const Main = () => {
+    const [data, setData] = useState([])
+    const [dataToRender, setDataToRender] = useState([])
+    const [urlToFetch, setUrlToFetch] = useState('https://restcountries.com/v3.1/all')
+
+    console.log(data);
+
+    useEffect(() => {
+        fetchData (urlToFetch, setData, setDataToRender)
+    }, [urlToFetch]);
+
+    if(dataToRender.length === 0) return <h1>Loading...</h1>
+
     return <main>
         <StyledForm>
-            <StyledInput type="text" placeholder="Search for a country…"/>
-            <StyledSelect name="" id="">
+            <StyledInput type="text" placeholder="Search for a country…" onChange={(e) => {filterBySearch(e.target.value, data, setDataToRender)}}/>
+
+            <StyledSelect name="" id="" onChange={(e)=>{filterByRegion(e.target.value, setUrlToFetch)}}>
                 <option value="0">Filter by Region</option>
                 <option value="1">Africa</option>
                 <option value="2">America</option>
@@ -13,7 +32,43 @@ const Main = () => {
                 <option value="5">Oceania</option>
             </StyledSelect>
         </StyledForm>
+        <div>{dataToRender.map(country => (
+            <StyledCard key={v4()}>
+                <StyledFlag src={country.flags.svg} alt="" />
+                <StyledName>{country.name.common}</StyledName>
+                <StyledText>Population: <StyledSpan>{country.population}</StyledSpan></StyledText>
+                <StyledText>Region: <StyledSpan>{country.region}</StyledSpan></StyledText>
+                <StyledText>Capital: <StyledSpan>{country.capital}</StyledSpan></StyledText>
+            </StyledCard>
+        ))}</div>
     </main>
 }
 
+const filterByRegion = (value, setUrlToFetch) => {
+    if(Number(value) === 0) setUrlToFetch('https://restcountries.com/v3.1/all')
+    if(Number(value) === 1) setUrlToFetch('https://restcountries.com/v3.1/region/africa')
+    if(Number(value) === 2) setUrlToFetch('https://restcountries.com/v3.1/region/america')
+    if(Number(value) === 3) setUrlToFetch('https://restcountries.com/v3.1/region/asia')
+    if(Number(value) === 4) setUrlToFetch('https://restcountries.com/v3.1/region/europe')
+    if(Number(value) === 5) setUrlToFetch('https://restcountries.com/v3.1/region/oceania')
+    
+}
+
+const filterBySearch = (value, data, setDataToRender) => {
+    const filteredData = [...data]
+    if(!value) setDataToRender(data)
+    else setDataToRender(filteredData.filter(country => country.name.common.toLowerCase().includes(value.toLowerCase())))
+}
+
+const fetchData = async (url, setData, setDataToRender) =>{
+    const request = await fetch(url);
+    const data = await request.json()
+    setData(data)
+    setDataToRender(data)
+}
+
 export default Main
+
+
+
+

@@ -39,4 +39,32 @@ const StyledSelect = styled.select`
 	padding-right: 2rem;
 `;
 
-export { StyledForm, StyledInput, StyledSelect };
+const StyledCard = styled.div`
+	margin: 2rem 4rem;
+	background-color: #FFFFFF;
+	box-shadow: 0px 0px 7px 2px rgba(0, 0, 0, 0.0294384);
+	border-radius: 5px;
+	padding-bottom: 2rem;
+`
+
+const StyledFlag = styled.img`
+	border-radius: 5px 5px 0 0;
+	margin-bottom: 1.5rem;
+`
+
+const StyledName = styled.h3`
+	padding: 0 2rem;
+	margin-bottom: 1rem;
+`
+
+const StyledText = styled.p`
+	padding: 0 2rem;
+	margin-bottom: .4rem;
+	font-weight: 700;
+`
+
+const StyledSpan = styled.span`
+	font-weight: 300;
+`
+
+export { StyledForm, StyledInput, StyledSelect, StyledCard, StyledFlag, StyledName, StyledText, StyledSpan };
