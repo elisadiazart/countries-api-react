@@ -17,7 +17,7 @@ const Main = () => {
         fetchData (urlToFetch, setData, setDataToRender)
     }, [urlToFetch]);
 
-    if(dataToRender.length === 0) return <h1>Loading...</h1>
+    if(dataToRender.length === 0) return <h1>No results found</h1>
 
     return <main>
         <StyledForm>
