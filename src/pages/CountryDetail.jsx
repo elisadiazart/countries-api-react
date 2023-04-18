@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom"
-import { StyledCountry } from "./styles";
+import { StyledCountry, StyledButton, StyledFlag } from "./styles";
 
 
 
@@ -19,9 +19,9 @@ const CountryDetail = () => {
 
     if(dataCountry.length === 0) return <h1>Loading...</h1>
     return <StyledCountry>
-        <button onClick={() => navigate(`/`)}>Back</button>
+        <StyledButton onClick={() => navigate(`/`)}> Back </StyledButton>
             <div>
-                <img src={country.flags.svg} alt="" />
+                <StyledFlag src={country.flags.svg} alt="" />
                 <h2>{country.name.common}</h2>
                 <p>Population: <span>{country.population}</span></p>
                 <p>Region: <span>{country.region}</span></p>
