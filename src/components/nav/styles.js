@@ -15,4 +15,8 @@ const StyledDiv = styled.div`
 	gap: 0.5rem;
 `;
 
-export { StyledUl, StyledDiv };
+const StyledH1 = styled.h1`
+	cursor: pointer;
+`;
+
+export { StyledUl, StyledDiv, StyledH1 };

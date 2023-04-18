@@ -1,17 +1,18 @@
 import { useEffect, useState } from "react";
 import { StyledCard, StyledForm, StyledInput, StyledSelect, StyledFlag, StyledName, StyledText, StyledSpan } from "./styles"
 import { v4 } from "uuid";
+import { useNavigate } from "react-router-dom";
 
 
 
 
 
 const Main = () => {
+    const navigate = useNavigate()
     const [data, setData] = useState([])
     const [dataToRender, setDataToRender] = useState([])
     const [urlToFetch, setUrlToFetch] = useState('https://restcountries.com/v3.1/all')
-
-    console.log(data);
+    
 
     useEffect(() => {
         fetchData (urlToFetch, setData, setDataToRender)
@@ -33,7 +34,7 @@ const Main = () => {
             </StyledSelect>
         </StyledForm>
         <div>{dataToRender.map(country => (
-            <StyledCard key={v4()}>
+            <StyledCard key={v4()} onClick={() => navigate(`/country/${country.name.common}`)}>
                 <StyledFlag src={country.flags.svg} alt="" />
                 <StyledName>{country.name.common}</StyledName>
                 <StyledText>Population: <StyledSpan>{country.population}</StyledSpan></StyledText>
