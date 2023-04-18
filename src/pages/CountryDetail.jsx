@@ -17,16 +17,15 @@ const CountryDetail = () => {
     return <div>
         <button >Back</button>
         <h1>{params.country}</h1>
-            {/* <div>
+            <div>
                 <img src={country.flags.svg} alt="" />
                 <h2>{country.name.common}</h2>
                 <p>Population: <span>{country.population}</span></p>
                 <p>Region: <span>{country.region}</span></p>
                 <p>Capital: <span>{country.capital}</span></p>
-            </div> */}
+            </div>
     </div>
 }
-
 
 const fetchData = async (url, setData, setDataToRender) =>{
     const request = await fetch(url);
